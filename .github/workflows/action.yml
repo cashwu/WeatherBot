@@ -16,7 +16,7 @@ jobs:
     - name: 'get weather'
       run: wget wttr.in/Taichung.png
     - name: 'get date'
-      run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taiwan' date '+%Y-%m-%d %T')"
+      run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
     - name: 'send mail'
       uses: dawidd6/action-send-mail@master
       with:
@@ -25,7 +25,6 @@ jobs:
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
         subject: Taichung Weather (${{env.REPORT_DATE}})
-        body: abc123
+        body: file://Taichung.png
         to: cash@cashwu.com
         from: weather@cashwu.com
-        content_type: text/html
