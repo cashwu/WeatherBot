@@ -19,8 +19,9 @@ jobs:
       run: |
         wget wttr.in/Taichung.png
         echo "::set-env name=IMAGE::$(base64 Taichung.png)"
+        echo ${{ env.IMAGE }}
     - name: 'get date'
       run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
     - name: 'send mail'
       run: |
-        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "cash@cashwu.com" } ], "subject": "Weather Report (${{env.REPORT_DATE}})" } ], "from": { "email": "weather@cashwu.com" }, "content": [ { "type": "text/html", "value": "${{env.IMAGE}}" } ]}'
+        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "cash@cashwu.com" } ], "subject": "Weather Report (${{env.REPORT_DATE}})" } ], "from": { "email": "weather@cashwu.com" }, "content": [ { "type": "text/html", "value": "Weather" } ], "attachments" : [ { "content" : "${{ env.IMAGE }}", "type" : "image/png", "filename" : "Taichung.png" } ]}'
