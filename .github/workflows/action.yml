@@ -25,7 +25,7 @@ jobs:
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
         subject: Taichung Weather (${{env.REPORT_DATE}})
-        body: abc123
+        body: file://Taichung.png
         to: cash@cashwu.com
-        from: Weather Bot
+        from: weather@cashwu.com
         content_type: text/html
