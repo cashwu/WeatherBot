@@ -18,7 +18,8 @@ jobs:
     - name: 'get weather'
       run: |
         rm -f taichung.png
-        wget wttr.in/taichung.png
+        wget wttr.in/taichung_mq.png
+        mv taichung_mq.png taichung.png
     - name: 'commit'
       run: |
         echo $(date '+%Y-%m-%d %T') > date
