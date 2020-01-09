@@ -30,14 +30,15 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-    - name: 'get date'
-      run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
-    - name: 'send mail'
-      run: |
+    - name: 'get data'
+      run: | 
+        echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
         echo "::set-env name=IMAGE::https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png"
         echo "::set-evn name=EMAIL_TO::cash@cashwu.com"
         echo "::set-evn name=EMAIL_FROM::weather@cashwu.com"
         echo "::set-evn name=SUBJECT::Weather Report (${{env.REPORT_DATE}})"
+    - name: 'send mail'
+      run: |
         curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "${{env.EMAIL_TO}}" } ], "subject": "${{env.SUBJECT}}" } ], "from": { "email": "${{env.EMAIL_FROM}}" }, "content": [ { "type": "text/html", "value": "<img src='${{env.IMAGE}}' />" } ]}'
         
         
