@@ -37,7 +37,7 @@ jobs:
         MAIL_FROM=weather@cashwu.com
         IMAGE=https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png
         SUBJECT="Weather Report-$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
-        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${KEY}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "${MAIL_TO}" } ], "subject": "${SUBJECT}" } ], "from": { "email": "${MAIL_FROM}" }, "content": [ { "type": "text/html", "value": "<img src='${IMAGE}' />" } ]}'
+        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer $KEY" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "$MAIL_TO" } ], "subject": "$SUBJECT" } ], "from": { "email": "$MAIL_FROM" }, "content": [ { "type": "text/html", "value": "<img src='$IMAGE' />" } ]}'
         
         
         
