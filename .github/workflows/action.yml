@@ -19,8 +19,9 @@ jobs:
       run: |
         rm -f taichung.png
         wget wttr.in/taichung.png
-        sleep 3s
-        ls -al
+    - name: 'commit'
+      run: |
+        echo $(date '+%Y%m%d%H%M') > date
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
