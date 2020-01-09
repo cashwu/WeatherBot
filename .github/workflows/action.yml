@@ -19,11 +19,9 @@ jobs:
       run: |
         rm -f taichung.png
         wget wttr.in/taichung.png
-    - name: 'commit file'
-      run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add taichung.png
+        git add .
         git commit -m "add weather image"
     - name: Push changes
       uses: ad-m/github-push-action@master
