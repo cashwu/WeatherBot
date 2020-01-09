@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: setup
-      run: apt-get install wget
+      run: sudo apt-get install wget
     - name: 'get weather'
       run: wget wttr.in/Taichung.png
     - name: 'get date'
