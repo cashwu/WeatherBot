@@ -34,7 +34,7 @@ jobs:
       run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
     - name: 'send mail'
       run: |
-        echo ::set-env name=IMAGE::https://raw.githubusercontent.com/${{GITHUB_REPOSITORY}}/master/taichung.png
+        echo ::set-env name=IMAGE::https://raw.githubusercontent.com/$GITHUB_REPOSITORY/master/taichung.png
         echo ::set-evn name=EMAIL_TO::cash@cashwu.com
         echo ::set-evn name=EMAIL_FROM::weather@cashwu.com
         echo ::set-evn name=SUBJECT::Weather Report (${{env.REPORT_DATE}}) 
