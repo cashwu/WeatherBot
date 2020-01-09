@@ -33,7 +33,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: 'send mail'
       run: |
-        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header 'Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}' --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "cash@cashwu.com" } ], "subject": "Weather Report" } ], "from": { "email": "weather@cashwu.com" }, "content": [ { "type": "text/html", "value": "<img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${GITHUB_SHA}' />" } ]}'
+        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header 'Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}' --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "cash@cashwu.com" } ], "subject": "Weather Report" } ], "from": { "email": "weather@cashwu.com" }, "content": [ { "type": "text/html", "value": "<img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png' />" } ]}'
         
         
         
