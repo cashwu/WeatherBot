@@ -17,13 +17,16 @@ jobs:
         sudo apt-get install curl
     - name: 'get weather'
       run: |
+        rm taichung.png
         wget wttr.in/Taichung.png
         mv Taichung.png taichung.png
     - name: 'commit file'
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "add weather" -a
+        git add taichung.png
+        git commit -m "add weather image"
+        git status
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
