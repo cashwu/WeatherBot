@@ -19,6 +19,7 @@ jobs:
       run: |
         rm -f taichung.png
         wget wttr.in/taichung.png
+        sleep 3s
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add .
