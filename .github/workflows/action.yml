@@ -23,8 +23,6 @@ jobs:
     - name: 'commit'
       run: |
         echo $(date '+%Y-%m-%d %T') > date
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
         git add .
         git commit -m "add weather image"
     - name: 'push changes'
@@ -41,7 +39,7 @@ jobs:
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
         subject: Weather Report (${{env.DATE}})
-        body: <img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${{env.DATE}}' />
+        body: <img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${{env.DATE}}' alt="weather" />
         to: cash@cashwu.com
         from: weather@cashwu.com
         content_type: text/html
