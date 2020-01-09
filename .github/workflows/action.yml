@@ -1,0 +1,31 @@
+name: Weather Bot
+
+on: 
+  push:
+  schedule:
+  - cron: '30 23 * * *'
+
+jobs:
+  bot:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: setup
+      run: apt-get install wget
+    - name: 'get weather'
+      run: wget wttr.in/Taichung.png
+    - name: 'get date'
+      run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Taiwan' date '+%Y-%m-%d %T')"
+    - name: 'Send mail'
+      uses: dawidd6/action-send-mail@master
+      with:
+        server_address: smtp.sendgrid.net
+        server_port: 587
+        username: ${{ secrets.MAIL_USERNAME }}
+        password: ${{ secrets.MAIL_PASSWORD }}
+        subject: Taichung Weather (${{env.REPORT_DATE}})
+        body: file://Taichung.png
+        to: cash@cashwu.com
+        from: Weather Bot
+        content_type: image/png
