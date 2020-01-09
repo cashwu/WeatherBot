@@ -32,12 +32,12 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: 'send mail'
       run: |
-        echo "::set-evn name=DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
-        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${{ secrets.SENDGRID_API_KEY }}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "$EMAIL_TO" } ], "subject": "$SUBJECT - ${{env.DATE}}" } ], "from": { "email": "$EMAIL_FROM" }, "content": [ { "type": "text/html", "value": "<img src='$IMAGE' />" } ]}'
-      env:
-        EMAIL_TO: cash@cashwu.com
-        EMAIL_FROM: weather@cashwu.com
-        IMAGE: https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png
-        SUBJECT: Weather Report
+        KEY=${{ secrets.SENDGRID_API_KEY }}
+        MAIL_TO=cash@cashwu.com
+        MAIL_FROM=weather@cashwu.com
+        IMAGE=https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png
+        SUBJECT="Weather Report-$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
+        curl --request POST --url https://api.sendgrid.com/v3/mail/send --header "Authorization: Bearer ${KEY}" --header 'Content-Type: application/json' --data '{ "personalizations": [ { "to": [ { "email": "${MAIL_TO}" } ], "subject": "${SUBJECT}" } ], "from": { "email": "${MAIL_FROM}" }, "content": [ { "type": "text/html", "value": "<img src='${IMAGE}' />" } ]}'
+        
         
         
