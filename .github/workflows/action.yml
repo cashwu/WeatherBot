@@ -42,5 +42,5 @@ jobs:
         subject: Weather Report (${{env.DATE}})
         body: <img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${{env.DATE}}' alt="weather" />
         to: cash@cashwu.com
-        #from: weather@cashwu.com
+        from: weather
         content_type: text/html
