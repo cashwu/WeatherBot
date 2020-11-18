@@ -31,7 +31,7 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: 'get date'
-      run: echo "::set-env name=DATE::$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')"
+      run: echo "DATE=$(TZ=':Asia/Taipei' date '+%Y-%m-%d %T')" >> $GITHUB_ENV
     - name: 'send mail'
       uses: dawidd6/action-send-mail@master
       with:
@@ -39,8 +39,8 @@ jobs:
         server_port: 465
         username: ${{ secrets.MAIL_USERNAME }}
         password: ${{ secrets.MAIL_PASSWORD }}
-        subject: Weather Report (${{env.DATE}})
-        body: <img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${{env.DATE}}' alt="weather" />
+        subject: Weather Report (${{$DATE}})
+        body: <img src='https://raw.githubusercontent.com/cashwu/WeatherBot/master/taichung.png?${{$DATE}}' alt="weather" />
         to: cash@cashwu.com
         from: weather
         content_type: text/html
